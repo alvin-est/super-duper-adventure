@@ -2,12 +2,40 @@
     <h2>Most Recent</h2>
 </section>
 
-<article>
+{{!-- <article>
     <hgroup>
         <h3>Test Post</h3>
         <p>Created by me on November 3, 2024</p>
     </hgroup>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+    <details>
+        <summary role="button" class="outline">Comments</summary>
+        <div class="grid">
+            <section>
+                <h4>Community responses</h4>
+                    <p><kbd>Great post!</kbd> (by user on 2023-11-03)</p>
+                    <p><kbd>Couldn't have said it better!</kbd> (by user on 2023-11-02)</p>
+                    <p><kbd>Boring...</kbd> (by user on 2023-11-01)</p>
+            </section>
+            <section>
+                <h4>What do you think?</h4>
+                <form>
+                    <input type="text" name="comment" placeholder="Write a comment..." aria-label="Comment">
+                    <input type="submit" value="Submit" class="contrast outline"/>
+                </form>
+            </section>
+        </div>
+    </details>
+</article> --}}
+
+{{#each posts}}
+<article>
+    <hgroup>
+        <h3>{{ title }}</h3>
+        <p>Created by {{ user.username }} on {{format_date createdAt}}</p>
+    </hgroup>
+    <p>{{ content }}</p>
 
     <details>
         <summary role="button" class="outline">Comments</summary>
@@ -28,14 +56,5 @@
             </section>
         </div>
     </details>
-</article>
-
-{{#each posts}}
-<article>
-    <hgroup>
-        <h3>{{ title }}</h3>
-        <p>Created by {{ user.username }} on {{format_date createdAt}}</p>
-    </hgroup>
-    <p>{{ content }}</p>
 </article>
 {{/each}}

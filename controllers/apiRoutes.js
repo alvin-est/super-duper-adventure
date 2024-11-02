@@ -119,8 +119,25 @@ router.post('/logout', authorisedOnly, async (req, res) => {
 
 // Write new article
 router.post('/post', authorisedOnly, async (req, res) => {
-    console.log("Attempting to write new post: ", req.body);
-    res.send("Article posted.");
+    // console.log("Attempting to write new post: ", req.body);
+    // res.send("Article posted.");
+
+    try {
+        // Extract post data from the request body
+        const { title, content } = req.body;
+        
+        // Create a new post
+        const newPost = await Post.create({
+            title,
+            content,
+            user_id: req.session.user_id // Get the user_id from the session
+        });
+        console.log("New post created: ", newPost.toJSON());
+        res.status(201).json({ message: 'Post created successfully', post: newPost.toJSON() });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to create post', error: err.message });
+    }
 });
 
 // Comment on post
