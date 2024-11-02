@@ -20,6 +20,13 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
+            validate: {
+                customValidator(value) {
+                    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+                      throw new Error("Username must contain only alphanumeric characters and underscores.");
+                    }
+                }
+            },
         },
         email: {
             type: DataTypes.STRING,
