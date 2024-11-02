@@ -46,7 +46,7 @@ User.init(
         },
         sequelize,
         timestamps: false,
-        freezeTableName: true,
+        freezeTableName: false, /* let Sequelize pluralize the table name */
         underscored: true,
         modelName: 'user',
     }
