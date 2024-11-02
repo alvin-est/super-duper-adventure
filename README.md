@@ -11,13 +11,28 @@ A place where developers can publish blog posts and comment on other dev's posts
 - [Tests](#tests)
 - [Questions](#questions)
 ## Installation
-TBD
+1. Install PostgreSQL and NodeJS
+2. Clone the repo
+3. Navigate to the folder
+4. Create the database. Run the commands:
+      - psql -U [your_user]
+      - [fill out password]
+      - \i db/schema.sql
+5. Run 
+      - npm i && npm run seed
+6. Start the server
+      
 ## Usage
-TBD
+To use this app, you must first start the server:
+1. Run the command:
+      - npm run start 
+2. Navigate to the web URL 
+3. You will need to create an account to start posting.
 ## License
       This project is licensed under the MIT license.
 ## Screenshots
-![Screenshot](./misc/screenshot.png)
+![Screenshot](./misc/screenshot1.png)
+![Screenshot](./misc/screenshot2.png)
 ## Contributors
 @alvin-est
 ## Questions

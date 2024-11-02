@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure our view engine
-const helpers = require('./utils/helpers'); // Load custom helper functions
+const helpers = require('./src/utils/helpers'); // Load custom helper functions
 const hbs = exphbs.create({ helpers }); // Instantiate with custom configuration
 app.engine('handlebars', hbs.engine); // Set engine to custom Handlebars instance
 app.set('view engine', 'handlebars'); // Set Express.JS view engine to Handlebars
