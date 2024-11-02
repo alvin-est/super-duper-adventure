@@ -2,7 +2,7 @@
   "name": "super-duper-adventure",
   "version": "1.0.0",
   "description": "A place where developers can publish blog posts and comment on other dev's posts.",
-  "main": "server.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
