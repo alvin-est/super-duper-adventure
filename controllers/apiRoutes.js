@@ -1,14 +1,10 @@
 const router = require('express').Router();
 const authorisedOnly = require('../utils/auth');
 const nonAuthorisedOnly = require('../utils/noAuth');
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 
-/* To-do: Add middleware for authentication in relevant routes */
 // Sign up
 router.post('/register', nonAuthorisedOnly, async (req, res) => {
-    // console.log("Attempting to sign up: ", req.body);
-    // res.send("Sign up attempted.");
-
     try {
         // Extract user data from the request body
         const { username, email, password } = req.body;
@@ -52,9 +48,6 @@ router.post('/register', nonAuthorisedOnly, async (req, res) => {
 
 // Sign in
 router.post('/login', nonAuthorisedOnly, async (req, res) => {
-    // console.log("Attempting to sign in: ", req.body);
-    // res.send("Sign in attempted.");
-
     try {
         // Extract user data from the request body
         const { email, password } = req.body;
@@ -97,9 +90,6 @@ router.post('/login', nonAuthorisedOnly, async (req, res) => {
 
 // Logout
 router.post('/logout', authorisedOnly, async (req, res) => {
-    // console.log("Attempting to log out: ", req.body);
-    // res.send("Log out attempted.");
-
     try {
         // If the user is logged in, destroy the session
         if (req.session.logged_in) {
@@ -119,9 +109,6 @@ router.post('/logout', authorisedOnly, async (req, res) => {
 
 // Write new article
 router.post('/post', authorisedOnly, async (req, res) => {
-    // console.log("Attempting to write new post: ", req.body);
-    // res.send("Article posted.");
-
     try {
         // Extract post data from the request body
         const { title, content } = req.body;
@@ -142,8 +129,76 @@ router.post('/post', authorisedOnly, async (req, res) => {
 
 // Comment on post
 router.post('/comment', authorisedOnly, async (req, res) => {
-    console.log("Attempting to comment on post: ", req.body);
-    res.send("Comment posted.");
+    // console.log("Attempting to comment on post: ", req.body);
+    // res.send("Comment posted.");
+
+    try {
+        // Extract comment data from the request body
+        const { content, post_id } = req.body;
+        if (!content || !post_id) {
+            return res.status(400).json({ message: 'Content and post ID are required' });
+        }
+
+        const newComment = await Comment.create({
+            content,
+            user_id: req.session.user_id, // Assuming this is how you're tracking the logged-in user
+            post_id,
+        });
+
+        res.status(201).json(newComment);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to create comment', error: err.message });
+    }
+});
+
+// Delete a post
+router.delete('/removePost/:id', authorisedOnly, async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Comment.findByPk(postId);
+
+        // Check if the logged in user is the author
+        if(req.session.user_id === post.user_id) {
+            const post = await Post.findByPk(postId);
+            if (!post) {
+                return res.status(404).json({ message: 'Post not found' });
+            }
+
+            // Delete the post
+            await Post.destroy({ where: { id: postId } });
+            res.status(200).json({ message: 'Post deleted successfully' });
+            
+        }
+        else {
+            return res.status(403).json({ message: 'You do not have permission to delete this post' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to delete post', error: err.message });
+    }
+});
+
+// Delete a comment
+router.delete('/removeComment/:id', authorisedOnly, async (req, res) => {
+    try {
+        const commentId = req.params.id;
+        const comment = await Comment.findByPk(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        if (comment.user_id !== req.session.user_id) {
+            return res.status(403).json({ message: 'You do not have permission to delete this comment' });
+        }
+
+        await Comment.destroy({ where: { id: commentId } });
+
+        res.status(200).json({ message: 'Comment deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to delete comment', error: err.message });
+    }
 });
 
 module.exports = router;

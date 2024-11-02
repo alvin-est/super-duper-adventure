@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const authorisedOnly = require('../utils/auth');
 const nonAuthorisedOnly = require('../utils/noAuth');
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const e = require('express');
 
 // Home page
@@ -9,12 +9,21 @@ router.get('/', async (req, res) => {
     // console.log("Rendering home page.");
 
     try {
-        // Fetch all posts and include user information
+        // Fetch all posts - include user and comment information
         const postData = await Post.findAll({
             include: [
                 {
                     model: User,
                     attributes: ['username']
+                },
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['username']
+                        }
+                    ]
                 }
             ],
             order: [['createdAt', 'DESC']] // Order by creation date descending
@@ -37,6 +46,13 @@ router.get('/', async (req, res) => {
 // Dashboard
 router.get('/dashboard', authorisedOnly, async (req, res) => {
     // console.log("Rendering dashboard.");
+    // Fetch posts for the logged-in user
+    const postData = await Post.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        order: [['createdAt', 'DESC']] // Sort by creation date descending
+    });
 
     // Count the reviews for the logged-in user
     const noOfPosts = await Post.count({
@@ -45,12 +61,16 @@ router.get('/dashboard', authorisedOnly, async (req, res) => {
         }
     });
 
+    // Serialize data so the template can read it
+    const posts = postData.map((post) => post.get({ plain: true }));
+
     res.render('pages/dashboard' , {
         logged_in: req.session.logged_in,
         username: req.session.username,
         email: req.session.email,
         user_id: req.session.user_id,
-        total_posts: noOfPosts
+        total_posts: noOfPosts,
+        posts: posts
     });
 
 

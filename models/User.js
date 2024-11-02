@@ -59,4 +59,8 @@ User.init(
     }
 );
 
+User.prototype.getAllComments = async function() {
+    return await this.getComments({ include: [Post] });
+};
+
 module.exports = User;

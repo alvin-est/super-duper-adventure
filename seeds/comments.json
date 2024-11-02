@@ -1,0 +1,27 @@
+[
+    {
+      "content": "Great point! I hadn't considered the societal impact.",
+      "user_id": 2,
+      "post_id": 1
+    },
+    {
+      "content": "I agree, privacy is becoming more critical with every passing day.",
+      "user_id": 1,
+      "post_id": 2
+    },
+    {
+      "content": "Thanks for sharing your experience! Any tips for beginners?",
+      "user_id": 1,
+      "post_id": 3
+    },
+    {
+      "content": "Could you elaborate on your top debugging tool?",
+      "user_id": 2,
+      "post_id": 4
+    },
+    {
+      "content": "Loved the post! What's next in your series?",
+      "user_id": 1,
+      "post_id": 1
+    }
+]
