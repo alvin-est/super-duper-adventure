@@ -201,4 +201,40 @@ router.delete('/removeComment/:id', authorisedOnly, async (req, res) => {
     }
 });
 
+// Put route to edit a post
+router.put('/editPost/:id', authorisedOnly, async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const { title, content } = req.body;
+
+        // Check if title or content is provided for update
+        if (!title && !content) {
+            return res.status(400).json({ message: 'Please provide at least one field to update: title or content' });
+        }
+
+        // Fetch the post to check ownership or permissions
+        const post = await Post.findByPk(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Check if the user is the owner of the post
+        if (post.user_id !== req.session.user_id) {
+            return res.status(403).json({ message: 'You do not have permission to edit this post' });
+        }
+
+        // Update the post
+        await post.update({ 
+            title: title || post.title, 
+            content: content || post.content 
+        });
+
+        res.status(200).json({ message: 'Post updated successfully', post: post.toJSON() });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to update post', error: err.message });
+    }
+});
+
+
 module.exports = router;

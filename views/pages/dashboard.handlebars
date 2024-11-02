@@ -41,11 +41,15 @@
                             <p>{{content}}</p>
                             <small>Posted on: {{format_date createdAt}}</small>
                             <hr>
+                            {{!-- To edit the post --}}
+                            <small><a href="#" data-post-id="{{id}}" class="post-edit">Edit</a></small>
+                            <div style="display:inline-block;"> | </div>
                             {{!-- To delete the post --}}
                             <small><a href="#" data-post-id="{{id}}" class="post-delete">Delete</a></small>
                         </article>
                         <hr>
                     {{/each}}
+                    {{> modal}}
                 {{else}}
                     <p>No posts yet. Start by creating one above!</p>
                 {{/if}}

@@ -1,0 +1,19 @@
+{{!-- Modal for Editing a Post --}}
+<dialog closed>
+    <article>
+        <header>
+            <button aria-label="Close" rel="prev" onclick="document.querySelector('dialog').close();"></button>
+            <p>
+            <strong>📝 Edit</strong>
+            </p>
+        </header>
+        <form> 
+            <input type="hidden" id="edit-id" name="id" value="">
+            <input type="text" id="edit-title" name="title" placeholder="Title" aria-label="Text">
+            <textarea name="content" id="edit-content" placeholder="Write about something..." aria-label="Article content"></textarea>
+            <button type="submit" id="edit-submit" class="contrast outline">Submit</button>
+        </form>
+    </article>
+</dialog>
+
+<script src="/edit.js"></script>

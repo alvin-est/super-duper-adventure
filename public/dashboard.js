@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var imgCheckInterval = setInterval(checkImageLoaded, 100);
 });
 
-/* Event listener for post deletion */
+/* Event listener for deleting a post */
 document.addEventListener('DOMContentLoaded', () => {
     const deleteLinks = document.querySelectorAll('.post-delete');
 
@@ -56,6 +56,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('An error occurred while deleting the post');
                 }
             }
+        });
+    });
+});
+
+/* Event listener for editing a post */
+document.addEventListener('DOMContentLoaded', () => {
+    const editLinks = document.querySelectorAll('.post-edit');
+
+    editLinks.forEach(link => {
+        link.addEventListener('click', async function(e) {
+
+            e.preventDefault();
+            const postId = this.getAttribute('data-post-id');
+
+            // Set the post ID in the hidden input field when user clicks edit
+            alert("Editing post with ID: " + postId);
+            document.querySelector('#edit-id').value = postId;
+
+            // Select the dialog element
+            document.querySelector('dialog').showModal();
         });
     });
 });
