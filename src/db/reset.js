@@ -42,4 +42,4 @@ async function runSQLFile(filePath) {
   }
 }
 
-runSQLFile('./schema.sql');
+runSQLFile('./db/schema.sql');
