@@ -1,0 +1,9 @@
+<ul>
+    <li><a href="/">Home</a></li>
+    {{#unless logged_in}}
+        <li><a href="/login">Login</a></li>
+    {{else}}
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
+    {{/unless}}
+</ul>

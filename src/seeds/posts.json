@@ -1,0 +1,22 @@
+[
+    {
+      "title": "The Future of Tech",
+      "content": "Exploring emerging technologies and their impact on society.",
+      "user_id": 1
+    },
+    {
+      "title": "Why Privacy Matters",
+      "content": "A deep dive into the importance of digital privacy in the modern age.",
+      "user_id": 1
+    },
+    {
+      "title": "Starting with Node.js",
+      "content": "My journey into server-side JavaScript with Node.js",
+      "user_id": 2
+    },
+    {
+      "title": "The Art of Debugging",
+      "content": "Effective strategies to debug your code like a pro.",
+      "user_id": 2
+    }
+]
