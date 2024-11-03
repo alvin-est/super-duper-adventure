@@ -40,6 +40,10 @@ async function runSQLFile(filePath) {
   } catch (error) {
     console.error('An error occurred:', error);
   }
+  finally
+  {
+    process.exit();
+  }
 }
 
 runSQLFile('./db/schema.sql');

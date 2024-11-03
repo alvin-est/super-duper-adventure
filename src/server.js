@@ -15,12 +15,7 @@ const PORT = process.env.PORT || 3001;
 // Create our session with below config
 const sess = {
   secret: process.env.SESSION_SECRET,
-  cookie: {
-    // Expires after 30 minutes of inactivity
-    maxAge: 30 * 60 * 1000, // 30 minutes
-    secure: true, // Set to true if using HTTPS in production
-    sameSite: 'strict' // Prevent CSRF attacks
-  },
+  cookie: {},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
