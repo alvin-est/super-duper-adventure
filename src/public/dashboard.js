@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const postId = this.getAttribute('data-post-id');
 
             // Set the post ID in the hidden input field when user clicks edit
-            alert("Editing post with ID: " + postId);
+            // alert("Editing post with ID: " + postId);
             document.querySelector('#edit-id').value = postId;
 
             // Select the dialog element
