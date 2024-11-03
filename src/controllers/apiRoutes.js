@@ -34,7 +34,6 @@ router.post('/register', nonAuthorisedOnly, async (req, res) => {
                 message: 'Registration successful! You are now logged in.' 
               });
 
-            res.redirect('/dashboard');
         });    
     }
     catch (err) {
@@ -83,7 +82,6 @@ router.post('/login', nonAuthorisedOnly, async (req, res) => {
             req.session.logged_in = true;
 
             res.json({ user: user, message: 'Login successful!' });
-            res.redirect('/dashboard');
         });
     }
     catch (err) {
@@ -99,7 +97,6 @@ router.post('/logout', authorisedOnly, async (req, res) => {
             req.session.destroy(() => {
                 res.status(204).end();
             });
-            res.redirect('/login');
         }
         // If the user is not logged in, send a specific message
         else {
@@ -125,7 +122,6 @@ router.post('/post', authorisedOnly, async (req, res) => {
         });
         console.log("New post created: ", newPost.toJSON());
         res.status(201).json({ message: 'Post created successfully', post: newPost.toJSON() });
-        res.redirect('/dashboard');
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to create post', error: err.message });
@@ -134,8 +130,6 @@ router.post('/post', authorisedOnly, async (req, res) => {
 
 // Comment on post
 router.post('/comment', authorisedOnly, async (req, res) => {
-    // console.log("Attempting to comment on post: ", req.body);
-    // res.send("Comment posted.");
 
     try {
         // Extract comment data from the request body
@@ -176,7 +170,6 @@ router.delete('/removePost/:id', authorisedOnly, async (req, res) => {
         await post.destroy();
         res.status(200).json({ message: 'Post deleted successfully' });
 
-        res.redirect('/dashboard');
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to delete post', error: err.message });
@@ -235,7 +228,6 @@ router.put('/editPost/:id', authorisedOnly, async (req, res) => {
 
         res.status(200).json({ message: 'Post updated successfully', post: post.toJSON() });
 
-        res.redirect('/dashboard');
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to update post', error: err.message });
