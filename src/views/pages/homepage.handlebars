@@ -2,7 +2,7 @@
     <h2>Most Recent</h2>
 </section>
 
-{{#each posts}}
+{{#each posts as |post|}}
 <article>
     <hgroup>
         <h3>{{ title }}</h3>
@@ -22,7 +22,7 @@
                 <p>No comments yet.</p>
                 {{/each}}
             </section>
-            {{#if logged_in}}
+            {{#if ../logged_in}}
             <section>
                 <h4>Any thoughts?</h4>
                 <form class="commentForm" data-post-id="{{id}}">
@@ -31,6 +31,8 @@
                     <input type="submit" value="Submit" class="contrast outline"/>
                 </form>
             </section>
+            {{else}}
+            Not logged in.
             {{/if}}
         </div>
     </details>
