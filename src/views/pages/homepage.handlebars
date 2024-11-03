@@ -22,6 +22,7 @@
                 <p>No comments yet.</p>
                 {{/each}}
             </section>
+            {{#if logged_in}}
             <section>
                 <h4>Any thoughts?</h4>
                 <form class="commentForm" data-post-id="{{id}}">
@@ -30,6 +31,7 @@
                     <input type="submit" value="Submit" class="contrast outline"/>
                 </form>
             </section>
+            {{/if}}
         </div>
     </details>
 </article>
