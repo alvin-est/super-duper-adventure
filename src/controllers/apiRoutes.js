@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const authorisedOnly = require('../utils/auth');
-const nonAuthorisedOnly = require('../utils/noAuth');
+const authorisedOnly = require('../utils/auth.js');
+const nonAuthorisedOnly = require('../utils/noauth.js');
 const { User, Post, Comment } = require('../models');
 
 // Sign up
