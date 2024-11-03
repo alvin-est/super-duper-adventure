@@ -8,20 +8,18 @@ A place where developers can publish blog posts and comment on other dev's posts
 - [Screenshots](#screenshots)
 - [License](#license)
 - [Contributors](#Contributors)
-- [Tests](#tests)
 - [Questions](#questions)
 ## Installation
-1. Install PostgreSQL and NodeJS
-2. Clone the repo
-3. Navigate to the folder
-4. Create the database. Run the commands:
-      - psql -U [your_user]
-      - [fill out password]
-      - \i db/schema.sql
-5. Run 
-      - npm i && npm run seed
-6. Start the server
-      
+1. Install PostgreSQL and NodeJS.
+2. Clone the repo.
+3. Navigate to the folder.
+4. Run the commands:
+      - npm i
+      - npm run reset
+      - npm run seed
+
+5. Start the server.
+
 ## Usage
 To use this app, you must first start the server:
 1. Run the command:
