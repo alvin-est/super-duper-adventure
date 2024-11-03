@@ -96,6 +96,7 @@ router.post('/logout', authorisedOnly, async (req, res) => {
             req.session.destroy(() => {
                 res.status(204).end();
             });
+            res.redirect('/login');
         }
         // If the user is not logged in, send a specific message
         else {
