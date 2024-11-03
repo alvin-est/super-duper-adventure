@@ -18,7 +18,7 @@ const loginFormHandler = async (event) => {
         alert('Failed to log in');
       }
     }
-  };
+};
   
   document.getElementById("loginButton").addEventListener('click', loginFormHandler);
   
