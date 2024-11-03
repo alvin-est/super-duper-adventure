@@ -1,10 +1,10 @@
 // Import required modules
 const express = require('express'); // For our server
 const session = require('express-session'); // For our session
-const sequelize = require('./config/connection'); // To interact with our database
+const sequelize = require('./config/connection.js'); // To interact with our database
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const exphbs = require('express-handlebars'); // To use as the view engine
-const routes = require('./controllers'); // For routing server requests
+const routes = require('./controllers/index.js'); // For routing server requests
 require('dotenv').config();
 const path = require('path');
 
