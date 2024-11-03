@@ -22,3 +22,20 @@ const loginFormHandler = async (event) => {
   
   document.getElementById("loginButton").addEventListener('click', loginFormHandler);
   
+// Add real-time validation for immediate feedback
+document.getElementById('email').addEventListener('input', function(e) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(e.target.value)) {
+      this.setAttribute('aria-invalid', 'true');
+  } else {
+      this.setAttribute('aria-invalid', 'false');
+  }
+});
+
+document.getElementById('password').addEventListener('input', function(e) {
+  if(e.target.value.length < 8) {
+      this.setAttribute('aria-invalid', 'true');
+  } else {
+      this.setAttribute('aria-invalid', 'false');
+  }
+});
