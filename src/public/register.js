@@ -48,9 +48,19 @@ const registrationFormHandler = async (event) => {
 /* Button event listener */
 document.getElementById("submit").addEventListener('click', registrationFormHandler);
 
+// Add real-time validation for immediate feedback
 document.getElementById('username').addEventListener('input', function(e) {
   const usernameRegex = /^[a-zA-Z0-9_]+$/;
   if (!usernameRegex.test(e.target.value)) {
+      this.setAttribute('aria-invalid', 'true');
+  } else {
+      this.setAttribute('aria-invalid', 'false');
+  }
+});
+
+document.getElementById('email').addEventListener('input', function(e) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(e.target.value)) {
       this.setAttribute('aria-invalid', 'true');
   } else {
       this.setAttribute('aria-invalid', 'false');
