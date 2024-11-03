@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const authorisedOnly = require('../utils/auth.js');
-const nonAuthorisedOnly = require('../utils/noAuth.js');
-const { User, Post, Comment } = require('../models/index.js');
+const authorisedOnly = require('../utils/auth');
+const nonAuthorisedOnly = require('../utils/noAuth');
+const { User, Post, Comment } = require('../models');
 const e = require('express');
 
 // Home page
